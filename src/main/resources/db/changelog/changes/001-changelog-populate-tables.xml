@@ -12,7 +12,7 @@
       "description_id" integer NOT NULL,
       "type_id" integer NOT NULL,
       "category_id" integer NOT NULL,
-      "amount" NUMERIC(8,8) NOT NULL);
+      "amount" float NOT NULL);
     </sql>
 
     <sql>
