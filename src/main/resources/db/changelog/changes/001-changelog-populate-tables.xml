@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+  <changeSet author="admin" id="1">
+
+    <sql>
+      CREATE TABLE "record" (
+      "id" serial NOT NULL,
+      "name" varchar(255) NOT NULL,
+      "description_id" integer NOT NULL,
+      "type_id" integer NOT NULL,
+      "category_id" integer NOT NULL,
+      "amount" NUMERIC(8,8) NOT NULL);
+    </sql>
+
+    <sql>
+      CREATE TABLE "description" (
+      "id" serial NOT NULL,
+      "description" varchar(255) NOT NULL);
+    </sql>
+
+    <sql>
+      CREATE TABLE "type" (
+      "id" serial NOT NULL,
+      "type" varchar(255) NOT NULL);
+    </sql>
+
+    <sql>
+      CREATE TABLE "category" (
+      "id" serial NOT NULL,
+      "category" varchar(255) NOT NULL);
+    </sql>
+
+    <sql>
+      ALTER TABLE "record" ADD CONSTRAINT "record_pk" PRIMARY KEY ("id");
+      ALTER TABLE "description" ADD	CONSTRAINT "description_pk" PRIMARY KEY ("id");
+      ALTER TABLE "type" ADD CONSTRAINT "type_pk" PRIMARY KEY ("id");
+      ALTER TABLE "category" ADD CONSTRAINT "category_pk" PRIMARY KEY ("id");
+    </sql>
+
+    <sql>
+      ALTER TABLE "record" ADD CONSTRAINT "record_fk0" FOREIGN KEY ("description_id") REFERENCES "description"("id");
+      ALTER TABLE "record" ADD CONSTRAINT "record_fk1" FOREIGN KEY ("type_id") REFERENCES "type"("id");
+      ALTER TABLE "record" ADD CONSTRAINT "record_fk2" FOREIGN KEY ("category_id") REFERENCES "category"("id");
+    </sql>
+
+  </changeSet>
+</databaseChangeLog>
