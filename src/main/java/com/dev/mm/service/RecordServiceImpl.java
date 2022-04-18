@@ -1,11 +1,12 @@
 package com.dev.mm.service;
 
+import com.dev.mm.dto.CategoryDto;
+import com.dev.mm.dto.DescriptionDto;
 import com.dev.mm.dto.RecordDto;
-import com.dev.mm.entity.CategoryEntity;
+import com.dev.mm.dto.TypeDto;
 import com.dev.mm.entity.DescriptionEntity;
 import com.dev.mm.entity.RecordEntity;
 import com.dev.mm.entity.TypeEntity;
-import com.dev.mm.repository.CategoryRepository;
 import com.dev.mm.repository.DescriptionRepository;
 import com.dev.mm.repository.RecordRepository;
 import com.dev.mm.repository.TypeRepository;
@@ -20,29 +21,22 @@ public class RecordServiceImpl implements RecordService {
   RecordRepository recordRepository;
 
   @Autowired
-  DescriptionRepository descriptionRepository;
+  DescriptionService descriptionService;
 
   @Autowired
-  TypeRepository typeRepository;
+  TypeService typeService;
 
   @Autowired
-  CategoryRepository categoryRepository;
+  CategoryService categoryService;
 
   @Override
   public RecordDto addRecord(RecordDto recordDto) {
 
-    DescriptionEntity description = descriptionRepository.save(DescriptionEntity.builder()
-        .description(recordDto.getDescription().getTextDescription())
-        .creationDate(new Date(System.currentTimeMillis()))
-        .build());
+    DescriptionDto description = descriptionService.createDescription(recordDto.getDescription());
 
-    TypeEntity type = typeRepository.findById(recordDto.getType().getId()).orElseGet(() -> typeRepository.save(TypeEntity.builder()
-        .type(recordDto.getType().getTextType())
-        .build()));
+    TypeDto type = typeService.getOrCreateType(recordDto.getType());
 
-    CategoryEntity category = categoryRepository.findById(recordDto.getCategory().getId()).orElseGet(() -> categoryRepository.save(CategoryEntity.builder()
-        .category(recordDto.getCategory().getTextCategory())
-        .build()));
+    CategoryDto category = categoryService.getOrCreateCategory(recordDto.getCategory());
 
     recordRepository.save(RecordEntity.builder()
         .name(recordDto.getName())
