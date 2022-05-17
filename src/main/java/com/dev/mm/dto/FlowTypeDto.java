@@ -8,10 +8,10 @@ import lombok.experimental.FieldDefaults;
 @Data
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class CategoryDto {
+public class FlowTypeDto {
 
   Long id;
 
-  String textCategory;
+  String textType;
 
 }

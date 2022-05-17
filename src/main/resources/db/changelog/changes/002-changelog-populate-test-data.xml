@@ -7,7 +7,7 @@
 
     <sql>
       INSERT INTO "category" ("id", "category") VALUES (1, 'test');
-      INSERT INTO "type" ("id", "type") VALUES (1, 'test');
+      INSERT INTO "flow_type" ("id", "flow_type") VALUES (1, 'test');
       INSERT INTO "description" ("id", "description") VALUES (1, 'test');
     </sql>
 

@@ -1,5 +1,6 @@
 package com.dev.mm.api;
 
+import com.dev.mm.dto.CreateRecordDto;
 import com.dev.mm.dto.RecordDto;
 import com.dev.mm.service.RecordService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,11 +14,11 @@ import org.springframework.web.bind.annotation.RestController;
 public class RecordController {
 
   @Autowired
-  RecordService recordService;
+  private RecordService recordService;
 
   @PostMapping(value = "/add")
-  public RecordDto addRecord(@RequestBody RecordDto recordDto){
-    return recordService.addRecord(recordDto);
+  public RecordDto addRecord(@RequestBody CreateRecordDto createRecordDto){
+    return recordService.addRecord(createRecordDto);
   }
 
 }

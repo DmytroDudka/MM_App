@@ -8,10 +8,16 @@ import lombok.experimental.FieldDefaults;
 @Data
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class CategoryDto {
+public class CreateRecordDto {
 
-  Long id;
+  String name;
 
-  String textCategory;
+  String description;
+
+  String category;
+
+  String type;
+
+  Double amount;
 
 }
