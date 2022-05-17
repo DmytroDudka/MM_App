@@ -1,7 +1,6 @@
 package com.dev.mm.repository;
 
 import com.dev.mm.entity.DescriptionEntity;
-import com.dev.mm.entity.FlowTypeEntity;
 import java.util.Optional;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;

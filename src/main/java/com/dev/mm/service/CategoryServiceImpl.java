@@ -1,9 +1,7 @@
 package com.dev.mm.service;
 
 import com.dev.mm.dto.CategoryDto;
-import com.dev.mm.dto.FlowTypeDto;
 import com.dev.mm.entity.CategoryEntity;
-import com.dev.mm.entity.FlowTypeEntity;
 import com.dev.mm.repository.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
