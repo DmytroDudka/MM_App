@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 public class CategoryServiceImpl implements CategoryService{
 
   @Autowired
-  CategoryRepository categoryRepository;
+  private CategoryRepository categoryRepository;
 
 
   @Override

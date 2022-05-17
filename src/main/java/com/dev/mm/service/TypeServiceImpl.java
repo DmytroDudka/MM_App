@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 public class TypeServiceImpl implements TypeService {
 
   @Autowired
-  TypeRepository typeRepository;
+  private TypeRepository typeRepository;
 
   @Override
   public TypeDto getOrCreateType(TypeDto type) {

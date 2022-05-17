@@ -18,16 +18,16 @@ import org.springframework.stereotype.Service;
 public class RecordServiceImpl implements RecordService {
 
   @Autowired
-  RecordRepository recordRepository;
+  private RecordRepository recordRepository;
 
   @Autowired
-  DescriptionService descriptionService;
+  private DescriptionService descriptionService;
 
   @Autowired
-  TypeService typeService;
+  private TypeService typeService;
 
   @Autowired
-  CategoryService categoryService;
+  private CategoryService categoryService;
 
   @Override
   public RecordDto addRecord(RecordDto recordDto) {

@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class RecordController {
 
   @Autowired
-  RecordService recordService;
+  private RecordService recordService;
 
   @PostMapping(value = "/add")
   public RecordDto addRecord(@RequestBody RecordDto recordDto){

@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 public class DescriptionServiceImpl implements DescriptionService {
 
   @Autowired
-  DescriptionRepository descriptionRepository;
+  private DescriptionRepository descriptionRepository;
 
   @Override
   public DescriptionDto createDescription(DescriptionDto description) {
