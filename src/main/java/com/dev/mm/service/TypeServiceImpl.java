@@ -1,8 +1,6 @@
 package com.dev.mm.service;
 
-import com.dev.mm.dto.CategoryDto;
 import com.dev.mm.dto.TypeDto;
-import com.dev.mm.entity.CategoryEntity;
 import com.dev.mm.entity.TypeEntity;
 import com.dev.mm.repository.TypeRepository;
 import org.springframework.beans.factory.annotation.Autowired;

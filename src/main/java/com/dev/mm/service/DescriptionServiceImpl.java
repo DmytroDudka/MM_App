@@ -1,7 +1,6 @@
 package com.dev.mm.service;
 
 import com.dev.mm.dto.DescriptionDto;
-import com.dev.mm.dto.TypeDto;
 import com.dev.mm.entity.DescriptionEntity;
 import com.dev.mm.repository.DescriptionRepository;
 import java.sql.Date;
