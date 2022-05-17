@@ -27,4 +27,18 @@ public class DescriptionServiceImpl implements DescriptionService {
         .creationDate(entity.getCreationDate())
         .build();
   }
+
+  @Override
+  public DescriptionDto getDescriptionById(Long id) {
+    var result = descriptionRepository.findById(id);
+    if (result.isPresent()) {
+      var entity = result.get();
+      return DescriptionDto.builder()
+          .id(entity.getId())
+          .textDescription(entity.getDescription())
+          .creationDate(entity.getCreationDate())
+          .build();
+    }
+    throw new RuntimeException();
+  }
 }

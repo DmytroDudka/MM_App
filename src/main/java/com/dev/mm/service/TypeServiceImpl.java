@@ -1,5 +1,6 @@
 package com.dev.mm.service;
 
+import com.dev.mm.dto.DescriptionDto;
 import com.dev.mm.dto.FlowTypeDto;
 import com.dev.mm.entity.FlowTypeEntity;
 import com.dev.mm.repository.TypeRepository;
@@ -28,5 +29,18 @@ public class TypeServiceImpl implements TypeService {
         .id(newFlowType.getId())
         .textType(type)
         .build();
+  }
+
+  @Override
+  public FlowTypeDto getTypeById(Long id) {
+    var result = typeRepository.findById(id);
+    if (result.isPresent()) {
+      var entity = result.get();
+      return FlowTypeDto.builder()
+          .id(entity.getId())
+          .textType(entity.getFlowType())
+          .build();
+    }
+    throw new RuntimeException();
   }
 }

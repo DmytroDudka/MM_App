@@ -6,4 +6,6 @@ public interface CategoryService {
 
   CategoryDto getOrCreateCategory(String category);
 
+  CategoryDto getCategoryById(Long id);
+
 }

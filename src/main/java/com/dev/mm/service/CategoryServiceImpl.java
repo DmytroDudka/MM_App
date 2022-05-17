@@ -1,13 +1,14 @@
 package com.dev.mm.service;
 
 import com.dev.mm.dto.CategoryDto;
+import com.dev.mm.dto.FlowTypeDto;
 import com.dev.mm.entity.CategoryEntity;
 import com.dev.mm.repository.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class CategoryServiceImpl implements CategoryService{
+public class CategoryServiceImpl implements CategoryService {
 
   @Autowired
   private CategoryRepository categoryRepository;
@@ -29,5 +30,18 @@ public class CategoryServiceImpl implements CategoryService{
         .id(newCategory.getId())
         .textCategory(category)
         .build();
+  }
+
+  @Override
+  public CategoryDto getCategoryById(Long id) {
+    var result = categoryRepository.findById(id);
+    if (result.isPresent()) {
+      var entity = result.get();
+      return CategoryDto.builder()
+          .id(entity.getId())
+          .textCategory(entity.getCategory())
+          .build();
+    }
+    throw new RuntimeException();
   }
 }

@@ -6,4 +6,6 @@ public interface DescriptionService {
 
   DescriptionDto createDescription(String description);
 
+  DescriptionDto getDescriptionById(Long id);
+
 }

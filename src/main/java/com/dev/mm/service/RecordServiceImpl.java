@@ -28,7 +28,8 @@ public class RecordServiceImpl implements RecordService {
   @Override
   public RecordDto addRecord(CreateRecordDto createRecordDto) {
 
-    DescriptionDto description = descriptionService.createDescription(createRecordDto.getDescription());
+    DescriptionDto description = descriptionService.createDescription(
+        createRecordDto.getDescription());
 
     FlowTypeDto type = typeService.getOrCreateType(createRecordDto.getType());
 
@@ -50,5 +51,27 @@ public class RecordServiceImpl implements RecordService {
         .type(type)
         .amount(createRecordDto.getAmount())
         .build();
+  }
+
+  @Override
+  public RecordDto getRecordById(Long recordId) {
+    var result = recordRepository.findById(recordId);
+    if (result.isPresent()) {
+      var record = result.get();
+      return RecordDto.builder()
+          .id(recordId)
+          .name(record.getName())
+          .description(descriptionService.getDescriptionById(record.getDescriptionId()))
+          .category(categoryService.getCategoryById(record.getCategoryId()))
+          .type(typeService.getTypeById(record.getTypeId()))
+          .amount(record.getAmount())
+          .build();
+    }
+    return null;
+  }
+
+  @Override
+  public void deleteRecordById(Long recordId) {
+    recordRepository.deleteById(recordId);
   }
 }
