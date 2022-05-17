@@ -4,6 +4,6 @@ import com.dev.mm.dto.DescriptionDto;
 
 public interface DescriptionService {
 
-  DescriptionDto createDescription(DescriptionDto description);
+  DescriptionDto createDescription(String description);
 
 }

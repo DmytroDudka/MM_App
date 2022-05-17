@@ -1,9 +1,10 @@
 package com.dev.mm.service;
 
 import com.dev.mm.dto.CategoryDto;
+import com.dev.mm.dto.CreateRecordDto;
 import com.dev.mm.dto.DescriptionDto;
 import com.dev.mm.dto.RecordDto;
-import com.dev.mm.dto.TypeDto;
+import com.dev.mm.dto.FlowTypeDto;
 import com.dev.mm.entity.RecordEntity;
 import com.dev.mm.repository.RecordRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,22 +26,29 @@ public class RecordServiceImpl implements RecordService {
   private CategoryService categoryService;
 
   @Override
-  public RecordDto addRecord(RecordDto recordDto) {
+  public RecordDto addRecord(CreateRecordDto createRecordDto) {
 
-    DescriptionDto description = descriptionService.createDescription(recordDto.getDescription());
+    DescriptionDto description = descriptionService.createDescription(createRecordDto.getDescription());
 
-    TypeDto type = typeService.getOrCreateType(recordDto.getType());
+    FlowTypeDto type = typeService.getOrCreateType(createRecordDto.getType());
 
-    CategoryDto category = categoryService.getOrCreateCategory(recordDto.getCategory());
+    CategoryDto category = categoryService.getOrCreateCategory(createRecordDto.getCategory());
 
-    recordRepository.save(RecordEntity.builder()
-        .name(recordDto.getName())
+    RecordEntity entity = recordRepository.save(RecordEntity.builder()
+        .name(createRecordDto.getName())
         .categoryId(category.getId())
         .descriptionId(description.getId())
         .typeId(type.getId())
-        .amount(recordDto.getAmount())
+        .amount(createRecordDto.getAmount())
         .build());
 
-    return recordDto;
+    return RecordDto.builder()
+        .id(entity.getId())
+        .name(createRecordDto.getName())
+        .description(description)
+        .category(category)
+        .type(type)
+        .amount(createRecordDto.getAmount())
+        .build();
   }
 }

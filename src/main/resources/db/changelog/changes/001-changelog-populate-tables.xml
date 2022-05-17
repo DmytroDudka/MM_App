@@ -23,9 +23,9 @@
     </sql>
 
     <sql>
-      CREATE TABLE "type" (
+      CREATE TABLE "flow_type" (
       "id" serial NOT NULL,
-      "type" varchar(255) NOT NULL);
+      "flow_type" varchar(255) NOT NULL);
     </sql>
 
     <sql>
@@ -37,13 +37,13 @@
     <sql>
       ALTER TABLE "record" ADD CONSTRAINT "record_pk" PRIMARY KEY ("id");
       ALTER TABLE "description" ADD	CONSTRAINT "description_pk" PRIMARY KEY ("id");
-      ALTER TABLE "type" ADD CONSTRAINT "type_pk" PRIMARY KEY ("id");
+      ALTER TABLE "flow_type" ADD CONSTRAINT "type_pk" PRIMARY KEY ("id");
       ALTER TABLE "category" ADD CONSTRAINT "category_pk" PRIMARY KEY ("id");
     </sql>
 
     <sql>
       ALTER TABLE "record" ADD CONSTRAINT "record_fk0" FOREIGN KEY ("description_id") REFERENCES "description"("id");
-      ALTER TABLE "record" ADD CONSTRAINT "record_fk1" FOREIGN KEY ("type_id") REFERENCES "type"("id");
+      ALTER TABLE "record" ADD CONSTRAINT "record_fk1" FOREIGN KEY ("type_id") REFERENCES "flow_type"("id");
       ALTER TABLE "record" ADD CONSTRAINT "record_fk2" FOREIGN KEY ("category_id") REFERENCES "category"("id");
     </sql>
 

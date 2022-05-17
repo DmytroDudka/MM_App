@@ -19,14 +19,14 @@ import lombok.experimental.FieldDefaults;
 @NoArgsConstructor
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-@Table(name = "type")
-public class TypeEntity {
+@Table(name = "flow_type")
+public class FlowTypeEntity {
 
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
   Long id;
 
-  @Column(name = "type")
-  String type;
+  @Column(name = "flow_type")
+  String flowType;
 
 }

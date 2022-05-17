@@ -14,10 +14,10 @@ public class DescriptionServiceImpl implements DescriptionService {
   private DescriptionRepository descriptionRepository;
 
   @Override
-  public DescriptionDto createDescription(DescriptionDto description) {
+  public DescriptionDto createDescription(String description) {
 
     DescriptionEntity entity = descriptionRepository.save(DescriptionEntity.builder()
-        .description(description.getTextDescription())
+        .description(description)
         .creationDate(new Date(System.currentTimeMillis()))
         .build());
 

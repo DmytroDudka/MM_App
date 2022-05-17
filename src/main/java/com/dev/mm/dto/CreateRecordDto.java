@@ -1,6 +1,5 @@
 package com.dev.mm.dto;
 
-
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Data;
@@ -9,19 +8,16 @@ import lombok.experimental.FieldDefaults;
 @Data
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class RecordDto {
-
-  Long id;
+public class CreateRecordDto {
 
   String name;
 
-  DescriptionDto description;
+  String description;
 
-  CategoryDto category;
+  String category;
 
-  FlowTypeDto type;
+  String type;
 
   Double amount;
-
 
 }

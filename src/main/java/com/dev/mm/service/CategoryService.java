@@ -4,6 +4,6 @@ import com.dev.mm.dto.CategoryDto;
 
 public interface CategoryService {
 
-  CategoryDto getOrCreateCategory(CategoryDto category);
+  CategoryDto getOrCreateCategory(String category);
 
 }

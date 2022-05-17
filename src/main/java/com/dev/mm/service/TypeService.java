@@ -1,9 +1,9 @@
 package com.dev.mm.service;
 
-import com.dev.mm.dto.TypeDto;
+import com.dev.mm.dto.FlowTypeDto;
 
 public interface TypeService {
 
-  TypeDto getOrCreateType(TypeDto type);
+  FlowTypeDto getOrCreateType(String type);
 
 }
