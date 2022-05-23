@@ -4,6 +4,7 @@ import com.dev.mm.dto.DescriptionDto;
 import com.dev.mm.entity.DescriptionEntity;
 import com.dev.mm.repository.DescriptionRepository;
 import java.sql.Date;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,19 +24,19 @@ public class DescriptionServiceImpl implements DescriptionService {
 
     return DescriptionDto.builder()
         .id(entity.getId())
-        .textDescription(entity.getDescription())
+        .description(entity.getDescription())
         .creationDate(entity.getCreationDate())
         .build();
   }
 
   @Override
   public DescriptionDto getDescriptionById(Long id) {
-    var result = descriptionRepository.findById(id);
+    Optional<DescriptionEntity> result = descriptionRepository.findById(id);
     if (result.isPresent()) {
-      var entity = result.get();
+      DescriptionEntity entity = result.get();
       return DescriptionDto.builder()
           .id(entity.getId())
-          .textDescription(entity.getDescription())
+          .description(entity.getDescription())
           .creationDate(entity.getCreationDate())
           .build();
     }

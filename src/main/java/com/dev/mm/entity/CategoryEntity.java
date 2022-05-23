@@ -27,6 +27,6 @@ public class CategoryEntity {
   Long id;
 
   @Column(name = "category")
-  String category;
+  String categoryName;
 
 }

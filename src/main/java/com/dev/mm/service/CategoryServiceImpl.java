@@ -1,9 +1,9 @@
 package com.dev.mm.service;
 
 import com.dev.mm.dto.CategoryDto;
-import com.dev.mm.dto.FlowTypeDto;
 import com.dev.mm.entity.CategoryEntity;
 import com.dev.mm.repository.CategoryRepository;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,29 +17,29 @@ public class CategoryServiceImpl implements CategoryService {
   @Override
   public CategoryDto getOrCreateCategory(String category) {
 
-    var entity = categoryRepository.getByCategory(category);
+    Optional<CategoryEntity> entity = categoryRepository.getByCategory(category);
 
     if (entity.isPresent()) {
-      return CategoryDto.builder().id(entity.get().getId()).textCategory(category).build();
+      return CategoryDto.builder().id(entity.get().getId()).categoryName(category).build();
     }
 
-    var newCategory = categoryRepository.save(CategoryEntity.builder()
-        .category(category).build());
+    CategoryEntity newCategory = categoryRepository.save(CategoryEntity.builder()
+        .categoryName(category).build());
 
     return CategoryDto.builder()
         .id(newCategory.getId())
-        .textCategory(category)
+        .categoryName(category)
         .build();
   }
 
   @Override
   public CategoryDto getCategoryById(Long id) {
-    var result = categoryRepository.findById(id);
+    Optional<CategoryEntity> result = categoryRepository.findById(id);
     if (result.isPresent()) {
-      var entity = result.get();
+      CategoryEntity entity = result.get();
       return CategoryDto.builder()
           .id(entity.getId())
-          .textCategory(entity.getCategory())
+          .categoryName(entity.getCategoryName())
           .build();
     }
     throw new RuntimeException();

@@ -3,6 +3,7 @@ package com.dev.mm.api;
 import com.dev.mm.dto.CreateRecordDto;
 import com.dev.mm.dto.RecordDto;
 import com.dev.mm.service.RecordService;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,7 +23,7 @@ public class RecordController {
   @Autowired
   private RecordService recordService;
 
-  @PostMapping(value = "/add")
+  @PostMapping
   public RecordDto addRecord(@RequestBody CreateRecordDto createRecordDto){
     return recordService.addRecord(createRecordDto);
   }
@@ -35,5 +37,15 @@ public class RecordController {
   public ResponseEntity deleteRecord(@PathVariable(value = "recordId") Long recordId){
     recordService.deleteRecordById(recordId);
     return new ResponseEntity<>(HttpStatus.OK);
+  }
+
+  @PutMapping
+  public RecordDto updateRecord(@RequestBody CreateRecordDto createRecordDto){
+    return recordService.updateRecord(createRecordDto);
+  }
+
+  @GetMapping
+  public List<RecordDto> getAllRecords(){
+    return recordService.getAllRecords();
   }
 }

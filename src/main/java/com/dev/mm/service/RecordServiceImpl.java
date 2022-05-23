@@ -6,7 +6,14 @@ import com.dev.mm.dto.DescriptionDto;
 import com.dev.mm.dto.RecordDto;
 import com.dev.mm.dto.FlowTypeDto;
 import com.dev.mm.entity.RecordEntity;
+import com.dev.mm.mapper.CategoryMapper;
+import com.dev.mm.mapper.DescriptionMapper;
+import com.dev.mm.mapper.FlowTypeMapper;
+import com.dev.mm.mapper.RecordMapper;
 import com.dev.mm.repository.RecordRepository;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,15 +22,21 @@ public class RecordServiceImpl implements RecordService {
 
   @Autowired
   private RecordRepository recordRepository;
-
   @Autowired
   private DescriptionService descriptionService;
-
   @Autowired
   private TypeService typeService;
-
   @Autowired
   private CategoryService categoryService;
+
+  @Autowired
+  RecordMapper recordMapper;
+  @Autowired
+  CategoryMapper categoryMapper;
+  @Autowired
+  FlowTypeMapper flowTypeMapper;
+  @Autowired
+  DescriptionMapper descriptionMapper;
 
   @Override
   public RecordDto addRecord(CreateRecordDto createRecordDto) {
@@ -37,37 +50,41 @@ public class RecordServiceImpl implements RecordService {
 
     RecordEntity entity = recordRepository.save(RecordEntity.builder()
         .name(createRecordDto.getName())
-        .categoryId(category.getId())
-        .descriptionId(description.getId())
-        .typeId(type.getId())
+        .category(categoryMapper.categoryToEntity(category))
+        .description(descriptionMapper.descriptionToEntity(description))
+        .flowType(flowTypeMapper.flowTypeToEntity(type))
         .amount(createRecordDto.getAmount())
         .build());
 
-    return RecordDto.builder()
-        .id(entity.getId())
-        .name(createRecordDto.getName())
-        .description(description)
-        .category(category)
-        .type(type)
-        .amount(createRecordDto.getAmount())
-        .build();
+    return recordMapper.recordToDto(entity);
+  }
+
+  @Override
+  public RecordDto updateRecord(CreateRecordDto createRecordDto) {
+    //TODO: Implement update functionality
+    return null;
   }
 
   @Override
   public RecordDto getRecordById(Long recordId) {
-    var result = recordRepository.findById(recordId);
+    Optional<RecordEntity> result = recordRepository.findById(recordId);
     if (result.isPresent()) {
-      var record = result.get();
-      return RecordDto.builder()
-          .id(recordId)
-          .name(record.getName())
-          .description(descriptionService.getDescriptionById(record.getDescriptionId()))
-          .category(categoryService.getCategoryById(record.getCategoryId()))
-          .type(typeService.getTypeById(record.getTypeId()))
-          .amount(record.getAmount())
-          .build();
+      RecordEntity record = result.get();
+      return recordMapper.recordToDto(record);
     }
     return null;
+  }
+
+  @Override
+  public List<RecordDto> getAllRecords() {
+    List<RecordEntity> recordEntities = recordRepository.findAll();
+    List<RecordDto> recordDtos = new ArrayList<>();
+
+    for (RecordEntity recordEntity : recordEntities) {
+      recordDtos.add(recordMapper.recordToDto(recordEntity));
+    }
+
+    return recordDtos;
   }
 
   @Override

@@ -2,9 +2,12 @@ package com.dev.mm.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -29,14 +32,17 @@ public class RecordEntity {
   @Column(name = "name")
   String name;
 
-  @Column(name = "description_id")
-  Long descriptionId;
+  @JoinColumn(name = "description_id")
+  @ManyToOne(fetch = FetchType.EAGER)
+  DescriptionEntity description;
 
-  @Column(name = "type_id")
-  Long typeId;
+  @JoinColumn(name = "type_id")
+  @ManyToOne(fetch = FetchType.EAGER)
+  FlowTypeEntity flowType;
 
-  @Column(name = "category_id")
-  Long categoryId;
+  @JoinColumn(name = "category_id")
+  @ManyToOne(fetch = FetchType.EAGER)
+  CategoryEntity category;
 
   @Column(name = "amount")
   Double amount;
