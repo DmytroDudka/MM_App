@@ -1,5 +1,6 @@
 package com.dev.mm.dto;
 
+import java.util.Date;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -12,19 +13,20 @@ import lombok.experimental.FieldDefaults;
 @NoArgsConstructor
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class RecordDto {
+public class ResponseRecordDto {
 
   Long id;
 
   String name;
 
-  DescriptionDto description;
+  String description;
 
-  CategoryDto category;
+  Date creationDate;
 
-  FlowTypeDto flowType;
+  String category;
+
+  String flowType;
 
   Double amount;
-
 
 }

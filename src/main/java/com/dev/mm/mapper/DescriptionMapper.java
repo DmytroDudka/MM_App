@@ -9,12 +9,10 @@ import org.mapstruct.factory.Mappers;
 @Mapper(componentModel = "spring")
 public interface DescriptionMapper {
 
-
   DescriptionMapper INSTANCE = Mappers.getMapper(DescriptionMapper.class);
 
   @Mapping(source = "id", target = "id")
   DescriptionEntity descriptionToEntity(DescriptionDto dto);
-
 
   @Mapping(source = "id", target = "id")
   DescriptionDto descriptionToDto(DescriptionEntity entity);

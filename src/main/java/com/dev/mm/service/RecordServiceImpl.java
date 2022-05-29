@@ -30,13 +30,13 @@ public class RecordServiceImpl implements RecordService {
   private CategoryService categoryService;
 
   @Autowired
-  RecordMapper recordMapper;
+  private RecordMapper recordMapper;
   @Autowired
-  CategoryMapper categoryMapper;
+  private CategoryMapper categoryMapper;
   @Autowired
-  FlowTypeMapper flowTypeMapper;
+  private FlowTypeMapper flowTypeMapper;
   @Autowired
-  DescriptionMapper descriptionMapper;
+  private DescriptionMapper descriptionMapper;
 
   @Override
   public RecordDto addRecord(CreateRecordDto createRecordDto) {

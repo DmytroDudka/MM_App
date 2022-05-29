@@ -2,8 +2,11 @@ package com.dev.mm.api;
 
 import com.dev.mm.dto.CreateRecordDto;
 import com.dev.mm.dto.RecordDto;
+import com.dev.mm.dto.ResponseRecordDto;
+import com.dev.mm.mapper.RecordMapper;
 import com.dev.mm.service.RecordService;
 import java.util.List;
+import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,10 +21,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/record")
-public class RecordController {
+public class RecordController extends ControllerBase{
 
   @Autowired
   private RecordService recordService;
+
+  @Autowired
+  private RecordMapper recordMapper;
 
   @PostMapping
   public RecordDto addRecord(@RequestBody CreateRecordDto createRecordDto){
@@ -29,8 +35,8 @@ public class RecordController {
   }
 
   @GetMapping(value = "/{recordId}")
-  public RecordDto getRecord(@PathVariable(value = "recordId") Long recordId){
-    return recordService.getRecordById(recordId);
+  public ResponseRecordDto getRecord(@PathVariable(value = "recordId") Long recordId){
+    return recordMapper.recordDtoToResponseDto(recordService.getRecordById(recordId));
   }
 
   @DeleteMapping(value = "/{recordId}")
@@ -45,7 +51,8 @@ public class RecordController {
   }
 
   @GetMapping
-  public List<RecordDto> getAllRecords(){
-    return recordService.getAllRecords();
+  public List<ResponseRecordDto> getAllRecords(){
+    return recordService.getAllRecords().stream()
+        .map(s -> recordMapper.recordDtoToResponseDto(s)).collect(Collectors.toList());
   }
 }
