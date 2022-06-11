@@ -91,4 +91,16 @@ public class RecordServiceImpl implements RecordService {
   public void deleteRecordById(Long recordId) {
     recordRepository.deleteById(recordId);
   }
+
+  @Override
+  public Double getSumByFlowType(FlowTypeDto flowTypeDto) {
+    Optional<Double> result = recordRepository.getSumByFlowType(flowTypeDto.getId());
+    return result.orElseGet(() -> (double) 0);
+  }
+
+  @Override
+  public Double getSumByCategory(CategoryDto categoryDto) {
+    Optional<Double> result = recordRepository.getSumByCategory(categoryDto.getId());
+    return result.orElseGet(() -> (double) 0);
+  }
 }

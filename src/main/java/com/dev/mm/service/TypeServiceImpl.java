@@ -1,8 +1,13 @@
 package com.dev.mm.service;
 
+import com.dev.mm.dto.CategoryDto;
 import com.dev.mm.dto.FlowTypeDto;
+import com.dev.mm.entity.CategoryEntity;
 import com.dev.mm.entity.FlowTypeEntity;
+import com.dev.mm.mapper.FlowTypeMapper;
 import com.dev.mm.repository.TypeRepository;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,6 +17,9 @@ public class TypeServiceImpl implements TypeService {
 
   @Autowired
   private TypeRepository typeRepository;
+
+  @Autowired
+  FlowTypeMapper flowTypeMapper;
 
   @Override
   public FlowTypeDto getOrCreateType(String type) {
@@ -42,5 +50,15 @@ public class TypeServiceImpl implements TypeService {
           .build();
     }
     throw new RuntimeException();
+  }
+
+  @Override
+  public List<FlowTypeDto> getAllFlowTypes() {
+
+    List<FlowTypeDto> result= new ArrayList<>();
+    Iterable<FlowTypeEntity> response = typeRepository.findAll();
+
+    response.forEach(e -> result.add(flowTypeMapper.flowTypeToDto(e)));
+    return result;
   }
 }

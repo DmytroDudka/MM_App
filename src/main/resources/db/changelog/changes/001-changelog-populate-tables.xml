@@ -19,7 +19,7 @@
       CREATE TABLE "description" (
       "id" serial NOT NULL,
       "description" varchar(255) NOT NULL,
-      "creation_date" DATE);
+      "creation_date" timestamp with time zone);
     </sql>
 
     <sql>
