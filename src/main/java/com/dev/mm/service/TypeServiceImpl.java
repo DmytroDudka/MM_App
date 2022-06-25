@@ -40,19 +40,6 @@ public class TypeServiceImpl implements TypeService {
   }
 
   @Override
-  public FlowTypeDto getTypeById(Long id) {
-    Optional<FlowTypeEntity> result = typeRepository.findById(id);
-    if (result.isPresent()) {
-      FlowTypeEntity entity = result.get();
-      return FlowTypeDto.builder()
-          .id(entity.getId())
-          .flowType(entity.getFlowType())
-          .build();
-    }
-    throw new RuntimeException();
-  }
-
-  @Override
   public List<FlowTypeDto> getAllFlowTypes() {
 
     List<FlowTypeDto> result= new ArrayList<>();

@@ -31,19 +31,22 @@ public class StatisticServiceImpl implements StatisticService {
 
     List<FlowTypeStatisticDto> sortedType = getTypeStatistics();
 
-    for (int i = sortedCategory.size() - 3; i > 0; i--) {
-      sortedCategory.remove(i);
-    }
-
-    for (int i = sortedType.size() - 3; i > 0; i--) {
-      sortedType.remove(i);
-    }
-
     return StatisticDto.builder()
         .categoryStatistics(sortedCategory)
         .flowTypeStatistics(sortedType)
         .build();
   }
+
+  @Override
+  public List<CategoryStatisticDto> generateCategoryStatisticDto() {
+    return getCategoryStatistics();
+  }
+
+  @Override
+  public List<FlowTypeStatisticDto> generateFlowTypeStatisticDto() {
+    return getTypeStatistics();
+  }
+
 
   private List<CategoryStatisticDto> getCategoryStatistics() {
     List<CategoryDto> dtos = categoryService.getAllCategories();

@@ -7,8 +7,6 @@ public interface TypeService {
 
   FlowTypeDto getOrCreateType(String type);
 
-  FlowTypeDto getTypeById(Long id);
-
   List<FlowTypeDto> getAllFlowTypes();
 
 }

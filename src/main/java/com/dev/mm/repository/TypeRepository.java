@@ -12,4 +12,5 @@ public interface TypeRepository extends CrudRepository<FlowTypeEntity, Long> {
 
   @Query(value = "select id, flow_type from flow_type ft where ft.flow_type = :flowType", nativeQuery = true)
   Optional<FlowTypeEntity> getByType(@Param("flowType") String flowType);
+
 }

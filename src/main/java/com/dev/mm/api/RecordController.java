@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/record")
-public class RecordController extends ControllerBase{
+public class RecordController extends BaseController {
 
   @Autowired
   private RecordService recordService;
@@ -43,11 +43,6 @@ public class RecordController extends ControllerBase{
   public ResponseEntity deleteRecord(@PathVariable(value = "recordId") Long recordId){
     recordService.deleteRecordById(recordId);
     return new ResponseEntity<>(HttpStatus.OK);
-  }
-
-  @PutMapping
-  public RecordDto updateRecord(@RequestBody CreateRecordDto createRecordDto){
-    return recordService.updateRecord(createRecordDto);
   }
 
   @GetMapping

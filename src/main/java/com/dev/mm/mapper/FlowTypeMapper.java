@@ -14,7 +14,6 @@ public interface FlowTypeMapper {
   @Mapping(source = "id", target = "id")
   FlowTypeEntity flowTypeToEntity(FlowTypeDto dto);
 
-
   @Mapping(source = "id", target = "id")
   FlowTypeDto flowTypeToDto(FlowTypeEntity entity);
 

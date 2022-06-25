@@ -16,5 +16,4 @@ public interface RecordRepository extends JpaRepository<RecordEntity, Long> {
   @Query(value = "SELECT SUM(amount) FROM record WHERE type_id = :flowtypeId", nativeQuery = true)
   Optional<Double> getSumByFlowType(@Param("flowtypeId") Long flowtypeId);
 
-
 }

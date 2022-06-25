@@ -12,4 +12,5 @@ public interface DescriptionRepository extends CrudRepository<DescriptionEntity,
 
   @Query(value = "select id, description from description ds where ds.description = :description", nativeQuery = true)
   Optional<DescriptionEntity> getByDescription(@Param("description") String description);
+
 }

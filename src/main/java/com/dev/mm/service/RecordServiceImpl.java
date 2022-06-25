@@ -60,12 +60,6 @@ public class RecordServiceImpl implements RecordService {
   }
 
   @Override
-  public RecordDto updateRecord(CreateRecordDto createRecordDto) {
-    //TODO: Implement update functionality
-    return null;
-  }
-
-  @Override
   public RecordDto getRecordById(Long recordId) {
     Optional<RecordEntity> result = recordRepository.findById(recordId);
     if (result.isPresent()) {

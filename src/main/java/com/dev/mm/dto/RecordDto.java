@@ -26,5 +26,4 @@ public class RecordDto {
 
   Double amount;
 
-
 }
